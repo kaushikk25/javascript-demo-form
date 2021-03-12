@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Demo Javascript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
+</head>
+
+<body>
+
+    <div class="container-fluid" style="width: 99%;">
+        <h3>Demo Javascript</h3>
+        
+        <div class="row" style="border:1px solid #ffd55f;">
+            <div class="col-sm-3 col-md-3 col-lg-3">
+                <form id="myFrom" name="myFrom" method="POST" style="margin: 8px;">
+                    <div class="form-group row">
+                        <label for="first_name" class="col-sm-3 col-form-label col-form-label-sm">Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-sm" id="first_name" name="first_name" placeholder="Enter first name" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="email" class="col-sm-3 col-form-label col-form-label-sm">Email</label>
+                        <div class="col-sm-9">
+                            <input type="email" class="form-control form-control-sm" id="email" name="email" placeholder="Enter email" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                        <div class="col-sm-9 mt-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender_male" value="Male" checked>
+                                <label class="form-check-label" for="gender_male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="gender_female" value="Female">
+                                <label class="form-check-label" for="gender_female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="gender" class="col-sm-3 col-form-label">Hobbies</label>
+                        <div class="col-sm-9 mt-2" id="hobbies_list">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="age" class="col-sm-3 col-form-label col-form-label-sm">Age</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control form-control-sm" id="age" name="age" placeholder="Enter age" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="state" class="col-sm-3 col-form-label col-form-label-sm">State</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control-md" id="state" name="state" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="city" class="col-sm-3 col-form-label col-form-label-sm">City</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control-md" id="city" name="city" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="save" class="col-sm-3 col-form-label col-form-label-sm"></label>
+                        <div class="col-sm-9" id="btnBlock">
+                            <input type="hidden" name="edit_key_no" id="edit_key_no">
+                            <button type="reset" id="btnCancle" onclick="javascirpt:RemoveCancle()" class="btn btn-md btn-secondary float-right" style="display: none;">Cancle</button>
+                            <button type="button" id="btnSubmit" class="btn btn-primary btn-md btn-block">Save</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="m-3 alert-danger" role="alert" id="ErrorBlock">
+                	
+                </div>
+            </div>
+            <div class="col-sm-9 col-md-9 col-lg-9">
+                <div class="form-group row">
+                    <label for="city" class="col-sm-1 col-form-label col-form-label-sm">Name</label>
+                    <div class="col-sm-9">
+                        <input type="search" class="form-control-md" name="searchName" id="searchName" placeholder="Search by name">
+                        <ul id="myUL">
+                        </ul>
+                    </div>
+                </div>
+
+                <table  id="studentDatasTable" class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name<button class="ml-2" id="shortByName" onclick="dataDisplay('short');">Asc</button></th>
+                        <th>Email</th>
+                        <th>Gender</th>
+                        <th>Hobbies</th>
+                        <th>Age</th>
+                        <th>State</th>
+                        <th>City</th>
+                        <th>Delete</th>
+                        <th>Modify</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript">
+    // Define satet and city variable constant.
+    const states = [{key: 0, name:"Choose State"}, {key: 1, name:"Gujarat"}, {key: 2, name:"Rajshthan"}, {key: 3, name:"Maharashtra"}];
+    const hobbies = [{ key: 1, name: "Reading" }, { key: 2, name: "Plyaing" }, { key: 3, name: "Swiming" }, { key: 4, name: "Writing" }, { key: 5, name: "Music" }];
+
+    const citys = [
+                { key: 1, name: "Surat", state_key: 1 },
+                { key: 2, name: "Baroda", state_key: 1 },
+                { key: 3, name: "Jaipur", state_key: 2 },
+                { key: 4, name: "Jodhpur", state_key: 2 },
+                { key: 5, name: "Mumbai", state_key: 3 },
+                { key: 6, name: "Pune", state_key: 3 },
+                { key: 7, name: "Ahmedabad", state_key: 1 },
+                { key: 8, name: "Ajmer", state_key: 2 },
+                { key: 9, name: "Amreli", state_key: 1 },
+                { key: 10, name: "Kota", state_key: 2 },    
+            ]
+
+    var studentDatas = [
+        { key: 1, name: "Kaushik", email: "kothiyakaushik25@gmail.com", gender: "Male", hobbies: [1,2], age: 22, state: 1, city: 9},
+        { key: 2, name: "Vinay", email: "vinayjivani777@gmail.com", gender: "Male", hobbies: [1,4], age: 21, state: 1, city: 1},
+        { key: 3, name: "Kavya", email: "avaniabc11@gmail.com", gender: "Female", hobbies: [2,3,4], age: 32, state: 3, city: 6},
+    ];
+
+    // selection box in add state, city and display all redy store data.
+    $(document).ready(function () {
+        $.each(states, function (key, state) {
+            $('#state').append($('<option>', { value: state['key'], text: state['name']}, '</option>'));
+        });
+
+        $.each(hobbies, function (key, hobbie) {
+            var hob = '<div class="form-check form-check-inline">';
+            hob += '<input class= "form-check-input hobbies_checkbox" type = "checkbox" id = "hobbbies_' + hobbie['name'] +'" name = "hobbies[]" value = "' + hobbie['key'] +'" >';
+            hob += '<label class="form-check-label" for="hobbbies_' + hobbie['name'] +'">'+ hobbie['name'] +'</label></div >';
+            $('#hobbies_list').append(hob);
+        });
+
+        $('#state').change(function () {
+            $('#city').empty();
+            $.each(citys.filter(city => city.state_key == $(this).val()), function (key, city) {
+                $('#city').append($('<option>', { value: city['key'], text: city['name']}, '</option>'));
+            });
+        });
+        dataDisplay();
+    });
+
+
+    // disply method for data print into studentDatasTable table.
+    function dataDisplay(short){
+        var appData = '';
+        diaplayStudentData = '';
+        if(short != undefined && short == 'short'){
+            if ($("#shortByName").html() == 'Asc') {
+                $("#shortByName").html('Des');
+                studentDatas.sort(function (x, y) {
+                    let a = x.name.toUpperCase(),
+                        b = y.name.toUpperCase();
+                        return a == b ? 0 : a > b ? 1 : -1;
+                });
+            }else {
+                $("#shortByName").html('Asc');
+                studentDatas.sort(function (x, y) {
+                    let a = x.name.toUpperCase(),
+                        b = y.name.toUpperCase();
+                    return a == b ? 0 : a > b ? -1 : 1;
+                });
+            }
+            diaplayStudentData = studentDatas;
+        }else if(short != undefined){
+            diaplayStudentData = short;
+        }else{
+            diaplayStudentData = studentDatas;
+        }
+
+        $.each(diaplayStudentData, function (key, value) {
+            var state = states.find(function (item) { return item.key == value['state'];})['name'];
+            var city = citys.find(function (item) { return item.key == value['city']; })['name'];
+            var hobbie = [];
+            $.each(value['hobbies'], function (key, value) {
+                hobbie.push(hobbies.find(function (item) { return item.key == value; })['name']);
+            });
+            appData += '<tr id=row_' + value['key'] + '><td>' + value['name'] + '</td><td>' + value['email'] + '</td><td>' + value['gender'] + '</td><td>' + hobbie + '</td><td>' + value['age'] + '</td><td>' + state + '</td><td>' + city + '</td><td><button class="btn btn-danger btn-sm" onclick="javascript:deleteStudentData(' + value['key'] + ');">Delete</buttom></td><td><button class="btn btn-primary btn-sm" onclick="javascript:updateStudentData(' + value['key'] + ');">Edit</buttom></td></tr>';
+        });
+        $("#studentDatasTable tbody").html(appData);
+
+        // reset the fill form data
+        RemoveCancle();
+    }
+
+
+
+    // form validation method and define rule of validation.
+    function formValidation(){
+        var valid = true;
+        
+        var error_arr = '<ul>';
+        if($("#first_name").val() == ''){
+            valid = false;
+            error_arr += '<li>Name is requred.</li>';
+            $("#first_name").css('border','1px solid red');
+        }else{
+            $("#first_name").css('border','');
+        }
+
+        if ($("#email").val() == '') {
+            valid = false;
+            error_arr += '<li>Email is requred.</li>';
+            $("#email").css('border', '1px solid red');
+        }else{
+            $("#email").css('border','');
+        }
+
+        if ($("#age").val() == '') {
+            valid = false;
+            error_arr += '<li>Age is requred.</li>';
+            $("#age").css('border', '1px solid red');
+        }else{
+            $("#age").css('border','');
+        }
+
+        if($("#state option:selected").val() == 'Choose State'){
+            valid = false;
+            error_arr += '<li>Choose any one satate.</li>';
+            $("#state").css('border', '1px solid red');
+        }else{
+            $("#state").css('border','');
+        }
+
+        if($("#city option:selected").val() == undefined){
+            valid = false;
+            error_arr += '<li>Choose any one city.</li>';
+            $("#city").css('border', '1px solid red');
+        }else{
+            $("#city").css('border','');
+        }
+
+        error_arr += '</ul>';
+        if (!valid) {
+        	$("#ErrorBlock").html(error_arr);
+        }
+        return valid;
+    }
+
+    
+    // Delete funcation to remove data in studentDatas array.
+    function deleteStudentData(key){
+        const index = studentDatas.findIndex(x => x.key === key);
+        if (index !== undefined) studentDatas.splice(index, 1);
+        dataDisplay();
+    }
+
+
+    // Update funcation to studentDatas array.
+    function updateStudentData(key) {
+        var studentData = studentDatas.find(function (item) { return item.key == key });
+        $("#first_name").val(studentData['name']);
+        $("#email").val(studentData['email']);
+        $('input:radio[name=gender]').filter('[value='+ studentData['gender']+']').prop('checked', true);
+        $(".hobbies_checkbox").val(studentData['hobbies']);
+        $("#age").val(studentData['age']);
+        $("#state").val(studentData['state']).trigger('change');
+        $("#city").val(studentData['city']).trigger('change');
+        $("#edit_key_no").val(key);
+        $("#btnSubmit").text('Update').removeClass('btn-secondary btn-block').addClass('float-right btn-warning');
+        $("#btnCancle").show().css('margin-right', '10px');
+        $("#first_name").focus();
+    }
+
+
+    // Cancle button click then reset form and remove cancle button.
+    function RemoveCancle(){
+        $("#btnCancle").hide();
+        $("#btnSubmit").text('Save').removeClass('flot-right btn-warning').addClass('btn-primary btn-block');
+        $("#myFrom")[0].reset();
+        $('#city').empty();
+        $("#edit_key_no").val('');
+        $("#ErrorBlock").html('');
+    }
+
+
+    // Save button click then save and update data studentDatas array and disply in table.
+    $('#btnSubmit').on('click', function (e) {
+        e.preventDefault()
+        if (formValidation()) {
+            var name = $("#first_name").val();
+            var email = $("#email").val();
+            var gender = $('input[name="gender"]:checked').val();
+            var hobbies = [];
+            $('input:checkbox[name="hobbies[]"]:checked').each(function () {
+                hobbies.push($(this).val());
+            });
+            var age = $("#age").val();
+            var state = $("#state").val();
+            var city = $("#city").val();
+            var edit_key_no = $("#edit_key_no").val();
+
+            if(edit_key_no == undefined || edit_key_no == 0){
+                studentDatas.push({ key: studentDatas.length+1,name: name, email: email, gender: gender, hobbies: hobbies, age: age, state: state, city: city });
+            }else{
+                student_index = studentDatas.findIndex(x => x.key == edit_key_no);
+                if (student_index !== undefined){
+                    studentDatas[student_index] = { key: edit_key_no, name: name, email: email, gender: gender, hobbies: hobbies, age: age, state: state, city: city };
+                }
+            }
+            dataDisplay();
+        }
+    });
+   
+   
+    // srarch name on key up chage name list.
+    $("#searchName").on("keyup", function (e) {
+        e.preventDefault();
+        if ($(this).val() != '') {
+            var searchName = studentDatas.filter(student => student.name.toLowerCase().startsWith($(this).val().toLowerCase()));
+        }
+        dataDisplay(searchName);
+    });
+
+</script>
+</html>
